@@ -73,19 +73,6 @@
 	// 	}
 	// }
 
-	// 动态创建广告脚本和容器元素
-	await new Promise(resolve => {
-		// 创建脚本元素
-		const adScript = document.createElement("script");
-		adScript.async = true;
-		adScript.setAttribute("data-cfasync", "false");
-		adScript.src = "//pl27375823.profitableratecpm.com/b4/67/d3/b467d34cd59599f09915859af800e30d.js";
-		adScript.onload = adScript.onerror = resolve;
-		
-		// 将元素添加到页面
-		document.body.appendChild(adScript);
-	});
-
 	window["bannedExtensions"] = [
 		"\u4fa0\u4e49",
 		"\u5168\u6559\u7a0b",
