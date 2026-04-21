@@ -131,7 +131,7 @@ export async function boot() {
 	// 设定游戏加载时间，超过时间未加载就提醒
 	const configLoadTime = localStorage.getItem(lib.configprefix + "loadtime");
 	// 现在不暴露到全局变量里了，直接传给onload
-	const resetGameTimeout = setTimeout(lib.init.reset, configLoadTime ? parseInt(configLoadTime) : 10000);
+	const resetGameTimeout = setTimeout(lib.init.reset, configLoadTime ? parseInt(configLoadTime) : 60000);
 
 	if (typeof window.cordovaLoadTimeout != "undefined") {
 		clearTimeout(window.cordovaLoadTimeout);
@@ -771,6 +771,12 @@ export async function boot() {
 		}
 		await Promise.allSettled(promises);
 		delete _status.importing;
+	}
+
+	const initialLoading = document.getElementById("initial-loading");
+	if (initialLoading) {
+		initialLoading.style.opacity = "0";
+		setTimeout(() => initialLoading.remove(), 500);
 	}
 
 	Reflect.set(window, "resetGameTimeout", resetGameTimeout);

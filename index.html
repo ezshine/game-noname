@@ -215,7 +215,7 @@
 								.catch(onerror);
 						};
 
-						game.readFile = function readFile(fileName, callback = () => {}, error = () => {}) {
+						game.readFile = function readFile(fileName, callback = () => { }, error = () => { }) {
 							fetch(`./readFile?fileName=${fileName}`)
 								.then(response => response.json())
 								.then(result => {
@@ -238,7 +238,7 @@
 								.catch(error);
 						};
 
-						game.readFileAsText = function readFileAsText(fileName, callback = () => {}, error = () => {}) {
+						game.readFileAsText = function readFileAsText(fileName, callback = () => { }, error = () => { }) {
 							fetch(`./readFileAsText?fileName=${fileName}`)
 								.then(response => response.json())
 								.then(result => {
@@ -251,7 +251,7 @@
 								.catch(error);
 						};
 
-						game.writeFile = function writeFile(data, path, name, callback = () => {}) {
+						game.writeFile = function writeFile(data, path, name, callback = () => { }) {
 							game.ensureDirectory(path, () => {
 								if (Object.prototype.toString.call(data) == "[object File]") {
 									const fileReader = new FileReader();
@@ -289,7 +289,7 @@
 							});
 						};
 
-						game.removeFile = function removeFile(fileName, callback = () => {}) {
+						game.removeFile = function removeFile(fileName, callback = () => { }) {
 							fetch(`./removeFile?fileName=${fileName}`)
 								.then(response => response.json())
 								.then(result => {
@@ -298,7 +298,7 @@
 								.catch(error);
 						};
 
-						game.getFileList = function getFileList(dir, callback = () => {}, onerror) {
+						game.getFileList = function getFileList(dir, callback = () => { }, onerror) {
 							fetch(`./getFileList?dir=${dir}`)
 								.then(response => response.json())
 								.then(result => {
@@ -314,7 +314,7 @@
 								});
 						};
 
-						game.ensureDirectory = function ensureDirectory(list, callback = () => {}, file = false) {
+						game.ensureDirectory = function ensureDirectory(list, callback = () => { }, file = false) {
 							let pathArray = typeof list == "string" ? list.split("/") : list;
 							if (file) {
 								pathArray = pathArray.slice(0, -1);
@@ -322,7 +322,7 @@
 							game.createDir(pathArray.join("/"), callback, console.error);
 						};
 
-						game.createDir = function createDir(directory, successCallback = () => {}, errorCallback = () => {}) {
+						game.createDir = function createDir(directory, successCallback = () => { }, errorCallback = () => { }) {
 							fetch(`./createDir?dir=${directory}`)
 								.then(response => response.json())
 								.then(result => {
@@ -334,7 +334,7 @@
 								})
 								.catch(errorCallback);
 						};
-						game.removeDir = function removeDir(directory, successCallback = () => {}, errorCallback = () => {}) {
+						game.removeDir = function removeDir(directory, successCallback = () => { }, errorCallback = () => { }) {
 							fetch(`./removeDir?dir=${directory}`)
 								.then(response => response.json())
 								.then(result => {
@@ -358,3 +358,25 @@
 	<script src="game/package.js"></script>
 	<script src="game/game.js"></script>
 </head>
+
+<body>
+	<div id="initial-loading"
+		style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; font-family: 'Microsoft YaHei', sans-serif; z-index: 999999; background-color: #000; transition: opacity 0.5s;">
+		<style>
+			@keyframes pulse {
+				0% {
+					opacity: 0.5;
+				}
+
+				50% {
+					opacity: 1;
+				}
+
+				100% {
+					opacity: 0.5;
+				}
+			}
+		</style>
+		<div style="font-size: 14px; color: #888; animation: pulse 1.5s infinite;">正在加载核心数据，首次可能需要较长时间，请稍候...</div>
+	</div>
+</body>
