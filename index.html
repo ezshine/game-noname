@@ -379,4 +379,24 @@
 		</style>
 		<div style="font-size: 14px; color: #888; animation: pulse 1.5s infinite;">正在加载核心数据，首次可能需要较长时间，请稍候...</div>
 	</div>
+	<script>
+		(() => {
+			const observer = new MutationObserver(() => {
+				const initialLoading = document.getElementById("initial-loading");
+				if (!initialLoading) {
+					observer.disconnect();
+					return;
+				}
+				if (!document.querySelector("#splash, #window")) {
+					return;
+				}
+
+				observer.disconnect();
+				initialLoading.style.opacity = "0";
+				setTimeout(() => initialLoading.remove(), 500);
+			});
+
+			observer.observe(document.body, { childList: true, subtree: true });
+		})();
+	</script>
 </body>
