@@ -211,7 +211,7 @@
 		// 在控制台输出提示信息
 		console.error(message);
 		// 显示提示信息
-		alert(message);
+		// alert(message);
 	};
 	// 将 <script> 元素添加到 document.head 中
 	document.head.appendChild(script);
